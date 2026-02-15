@@ -17,4 +17,5 @@ def get_user_id(username: str) -> int | None:
         if row == None:
             return None
         else:
+            print(row["id"]) # Debugging statement
             return row["id"]
