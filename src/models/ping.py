@@ -1,39 +1,28 @@
 
 
 class Ping:
-    def __init__(self):
-        self.sender_user_id = 0
-        self.receiver_user_id = 0
-        self.ping_type = ""
-        self.message = ""
-        self.cost = 0
-
-    def setSenderUserId(self, sender_user_id) -> None:
+    # Take input from handleSendPing
+    def __init__(self, sender_user_id: int, receiver_user_id: int, ping_type: str, cost: int, message: str | None = None):
+        """
+        Docstring for __init__
+        
+        :param self: Description
+        :param sender_user_id: Description
+        :type sender_user_id: int
+        :param receiver_user_id: Description
+        :type receiver_user_id: int
+        :param ping_type: Description
+        :type ping_type: str
+        :param cost: Description
+        :type cost: int
+        :param message: Description
+        :type message: str | None
+        """
         self.sender_user_id = sender_user_id
-
-    def getSenderUserId(self) -> int:
-        return self.sender_user_id
-    
-    def setReceiverUserId(self, receiver_user_id) -> None:
         self.receiver_user_id = receiver_user_id
-
-    def getReceiverUserId(self) -> int:
-        return self.receiver_user_id
-    
-    def setPingType(self, ping_type) -> None:
         self.ping_type = ping_type
-
-    def getPingType(self) -> str:
-        return self.ping_type
-    
-    def setMessage(self, message) -> None:
-        self.message = message
-
-    def getMessage(self) -> str:
-        return self.message
-    
-    def setCost(self, cost) -> None:
         self.cost = cost
+        self.message = message
+        
 
-    def getCost(self) -> int:
-        return self.cost
+    

@@ -1,11 +1,25 @@
 from typing import Optional
 from src.data.settings_repo import ensure_default_settings, get_settings
+from src.models.settings import Settings
 from src.data.ping_repo import get_pings_for_user, delete_ping
 from src.models.user import createUser
 
 
 class FocusTokensApp:
     
+    def start(self):
+        ensure_default_settings() # Ensure default settings values
+        row = get_settings() # Read and store settings values from the database as a tuple
+
+        self.settings = Settings( # Initialize an instance of the Settings class and pass the database settings values to the constructor
+            daily_tokens=row["daily_tokens"],
+            normal_ping_cost=row["normal_ping_cost"],
+            urgent_ping_cost=row["urgent_ping_cost"],
+        )
+
+        if not self.settings.validate(): # Ensuree that the settings values are valid
+            print("Invalid system settings in database.")
+            return
 
     def start(self):
         createUser()
