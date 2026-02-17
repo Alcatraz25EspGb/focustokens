@@ -29,4 +29,4 @@ The application uses a layered architecture with controllers, models, and a pers
 3. Run the application:
 
 ```bash
-python src/cli/main.py
+python -m src.cli.main
