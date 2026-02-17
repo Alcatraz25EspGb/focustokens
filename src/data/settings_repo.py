@@ -25,3 +25,13 @@ def get_settings() -> Row:
         cur.execute("SELECT * FROM settings WHERE id = 1")
         row = cur.fetchone()
         return row
+    
+# Updates settings
+def update_settings(daily_tokens: int, normal_ping_cost: int, urgent_ping_cost: int) -> None:
+    with get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute(
+            "UPDATE settings SET daily_tokens = ?, normal_ping_cost = ?, urgent_ping_cost = ? WHERE id = 1",
+            (daily_tokens, normal_ping_cost, urgent_ping_cost),
+        )
+        conn.commit()

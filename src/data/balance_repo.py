@@ -15,3 +15,13 @@ def get_balance(user_id: int) -> Row | None:
         cur.execute("SELECT * FROM token_balances WHERE user_id = ?", (user_id,))
         row = cur.fetchone()
         return row
+
+# Updates balance    
+def upsert_balance(user_id: int, balance: int, last_refresh: str) -> None:
+    with get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute(
+            "INSERT OR REPLACE INTO token_balances (user_id, balance, last_refresh) VALUES (?, ?, ?)",
+            (user_id, balance, last_refresh),
+        )
+        conn.commit()

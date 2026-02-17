@@ -1,7 +1,4 @@
-
-
 class Settings:
-    # This is a constructor to store the database settings values
     def __init__(self, daily_tokens: int, normal_ping_cost: int, urgent_ping_cost: int):
         """
         Docstring for __init__
@@ -13,15 +10,15 @@ class Settings:
         :type normal_ping_cost: int
         :param urgent_ping_cost: Description
         :type urgent_ping_cost: int
-        """ 
-        self.daily_tokens: int = daily_tokens
-        self.normal_ping_cost: int = normal_ping_cost
-        self.urgent_ping_cost: int = urgent_ping_cost
-    
-    # This function determines the cost of the ping base on the ping type
-    def determineCost(self, ping_type: str) -> int | None: 
         """
-        Docstring for determineCost
+        # store daily tokens, normal ping cost, urgent ping cost
+        self.daily_tokens = daily_tokens
+        self.normal_ping_cost = normal_ping_cost
+        self.urgent_ping_cost = urgent_ping_cost
+
+    def determine_cost(self, ping_type: str) -> int | None:
+        """
+        Docstring for determine_cost
         
         :param self: Description
         :param ping_type: Description
@@ -29,15 +26,18 @@ class Settings:
         :return: Description
         :rtype: int | None
         """
+        # if ping type is normal -> return normal ping cost
         if ping_type == "normal":
-            return self.normal_ping_cost # If the ping type is normal, then the normal ping cost is assigned 
-        elif ping_type == "urgent":
-            return self.urgent_ping_cost # If the ping type is urgent, then the urgent ping cost is assigned
-        else:
-            return None # If ping type is unknown, no value is assigned or returned 
+            return self.normal_ping_cost
 
-    # This function validates the settings' values    
-    def validate(self) -> bool: 
+        # else if ping type is urgent -> return urgent ping cost
+        if ping_type == "urgent":
+            return self.urgent_ping_cost
+
+        # otherwise -> return invalid
+        return None
+
+    def validate(self) -> bool:
         """
         Docstring for validate
         
@@ -45,20 +45,17 @@ class Settings:
         :return: Description
         :rtype: bool
         """
-        is_valid = True
-        
-        if self.daily_tokens < 0: # Check if daily tokens is nonnegative
-            is_valid= False
-            return is_valid
-        if self.normal_ping_cost < 1: # Check if normal ping cost is greater than 1
-            is_valid = False
-            return is_valid
-        if self.urgent_ping_cost < 1: # Check if urgent ping cost is grater than 1
-            is_valid = False
-            return is_valid
-        if self.urgent_ping_cost < self.normal_ping_cost: # Check if urgent ping cost is greater than normal ping cost
-            is_valid = False
-            return is_valid
-        
-        return is_valid # Return True if none of the above conditions are satisfied 
-        
+        # if daily tokens is less than 1 -> invalid
+        if self.daily_tokens < 1:
+            return False
+
+        # if normal ping cost is less than 1 -> invalid
+        if self.normal_ping_cost < 1:
+            return False
+
+        # if urgent ping cost is less than normal ping cost -> invalid
+        if self.urgent_ping_cost < self.normal_ping_cost:
+            return False
+
+        # otherwise -> valid
+        return True
