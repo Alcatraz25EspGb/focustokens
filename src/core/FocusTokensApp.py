@@ -170,7 +170,7 @@ class FocusTokensApp:
         ping_type = input("Ping type (normal/urgent): ").strip().lower()
 
         # if ping type is not normal and not urgent -> display invalid ping type and return failure
-        cost = self.settings.determineCost(ping_type)
+        cost = self.settings.determine_cost(ping_type)
         if cost is None:
             print("Invalid ping type.")
             return
