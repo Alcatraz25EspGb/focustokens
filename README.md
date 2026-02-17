@@ -2,16 +2,18 @@
 
 FocusTokens is a token-based attention and check-in system. Users receive daily tokens and spend them to send "pings" (normal or urgent). Tokens reset daily and all actions are recorded for history.
 
-## Planned Features (MVP)
-- Daily token balances with reset rules
-- Send normal/urgent pings with costs
-- Ping history
-- Settings (daily tokens, costs)
-- Persistence (SQLite)
+## Description
+FocusTokens is a command-line application written in Python that manages user focus tokens.
+Users can send pings to each other, view token balances, and manage daily token usage.
+The application uses a layered architecture with controllers, models, and a persistent SQLite database.
 
-## Development Plan
-- Phase 1: Core logic + SQLite + CLI prototype
-- Phase 2: Flask web UI reusing the same core services
+## Features
+- User creation and selection
+- Daily token balance with automatic refresh
+- Send normal and urgent pings with token costs
+- View and delete ping history
+- Change system settings (token limits and costs)
+- Persistent storage using SQLite
 
 ## Project Structure
 - `src/core` - business logic (tokens, pings)
@@ -20,3 +22,11 @@ FocusTokens is a token-based attention and check-in system. Users receive daily 
 - `src/web` - Flask web UI (later)
 - `diagrams` - UML/DFD exports
 - `tests` - unit/integration tests
+
+## How to Run
+1. Ensure Python 3.10+ is installed
+2. Navigate to the project root directory
+3. Run the application:
+
+```bash
+python src/cli/main.py
